@@ -6,8 +6,8 @@ import {
 	type VaultData,
 } from "./types";
 
-const STORAGE_KEY = "commandvault.vault";
-const GLOBAL_STORAGE_KEY = "commandvault.globalVault";
+const STORAGE_KEY = "cmdvault.vault";
+const GLOBAL_STORAGE_KEY = "cmdvault.globalVault";
 
 export class VaultStorage {
 	constructor(

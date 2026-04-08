@@ -1,8 +1,17 @@
 # Changelog
 
-All notable changes to **CommandVault** are documented in this file.
+All notable changes to **CmdVault** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [0.1.1] - 2026-04-08
+
+### Changed
+
+- **Extension name** (Marketplace identifier) from `commandvault` to **`cmdvault`** so it can be published on the VS Code Marketplace (the previous id was taken).
+- **Display name** and branding: **CmdVault**.
+- Settings keys: `cmdvault.commandClickAction`, `cmdvault.useToolIcons`.
+- Storage keys: `cmdvault.vault`, `cmdvault.globalVault` (existing `commandvault.*` data is not migrated).
 
 ## [0.1.0] - 2026-04-08
 
@@ -15,4 +24,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Heuristic **tool icons** (Codicons) from command text.
 - Documentation and MIT license for marketplace packaging.
 
+[0.1.1]: https://github.com/Atharav31/commandvault/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Atharav31/commandvault/releases/tag/v0.1.0

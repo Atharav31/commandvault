@@ -56,18 +56,18 @@ function commandClickAction(
 	element: Extract<VaultTreeModel, { kind: "command" }>,
 ): vscode.Command | undefined {
 	const action = vscode.workspace
-		.getConfiguration("commandvault")
+		.getConfiguration("cmdvault")
 		.get<string>("commandClickAction", "none");
 	if (action === "run") {
 		return {
-			command: "commandvault.runInTerminal",
+			command: "cmdvault.runInTerminal",
 			title: "Run in Terminal",
 			arguments: [element],
 		};
 	}
 	if (action === "copy") {
 		return {
-			command: "commandvault.copyCommand",
+			command: "cmdvault.copyCommand",
 			title: "Copy Command",
 			arguments: [element],
 		};
@@ -75,7 +75,7 @@ function commandClickAction(
 	return undefined;
 }
 
-export class CommandVaultTreeProvider
+export class CmdVaultTreeProvider
 	implements vscode.TreeDataProvider<VaultTreeModel>
 {
 	private readonly _onDidChange = new vscode.EventEmitter<
@@ -142,7 +142,7 @@ export class CommandVaultTreeProvider
 					item.contextValue = "command";
 				}
 				const useToolIcons = vscode.workspace
-					.getConfiguration("commandvault")
+					.getConfiguration("cmdvault")
 					.get<boolean>("useToolIcons", true);
 				item.iconPath = useToolIcons
 					? themeIconForShellCommand(element.entry.command)

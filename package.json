@@ -1,8 +1,8 @@
 {
-	"name": "commandvault",
-	"displayName": "CommandVault — CLI & terminal command manager",
-	"description": "CommandVault by Atharav Uttekar: save, organize & run shell/CLI commands from a sidebar—per workspace folder, sections, plus global git/docker/npm-style snippets. Copy or run in terminal.",
-	"version": "0.1.0",
+	"name": "cmdvault",
+	"displayName": "CmdVault — CLI & terminal command manager",
+	"description": "CmdVault by Atharav Uttekar: save, organize & run shell/CLI commands from a sidebar—per workspace folder, sections, plus global git/docker/npm-style snippets. Copy or run in terminal.",
+	"version": "0.1.1",
 	"publisher": "atharav-dev",
 	"author": "Atharav Uttekar",
 	"license": "MIT",
@@ -16,9 +16,9 @@
 	},
 	"homepage": "https://github.com/Atharav31/commandvault#readme",
 	"keywords": [
-		"CommandVault",
+		"CmdVault",
 		"Atharav Uttekar",
-		"commandvault",
+		"cmdvault",
 		"commands",
 		"command manager",
 		"save commands",
@@ -58,31 +58,31 @@
 		"theme": "dark"
 	},
 	"activationEvents": [
-		"onView:commandvault.commandsView"
+		"onView:cmdvault.commandsView"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "commandvault",
-					"title": "CommandVault",
-					"icon": "media/commandvault.svg"
+					"id": "cmdvault",
+					"title": "CmdVault",
+					"icon": "media/cmdvault.svg"
 				}
 			]
 		},
 		"views": {
-			"commandvault": [
+			"cmdvault": [
 				{
-					"id": "commandvault.commandsView",
+					"id": "cmdvault.commandsView",
 					"name": "Commands"
 				}
 			]
 		},
 		"configuration": {
-			"title": "CommandVault",
+			"title": "CmdVault",
 			"properties": {
-				"commandvault.commandClickAction": {
+				"cmdvault.commandClickAction": {
 					"type": "string",
 					"enum": [
 						"none",
@@ -95,9 +95,9 @@
 						"Copy the command text to the clipboard."
 					],
 					"default": "none",
-					"description": "What happens when you click a command in the CommandVault tree."
+					"description": "What happens when you click a command in the CmdVault tree."
 				},
-				"commandvault.useToolIcons": {
+				"cmdvault.useToolIcons": {
 					"type": "boolean",
 					"default": true,
 					"description": "Infer an icon from the command text (git, npm, docker, …) using VS Code Codicons. Product icon themes can still restyle these icons."
@@ -106,42 +106,42 @@
 		},
 		"commands": [
 			{
-				"command": "commandvault.refresh",
+				"command": "cmdvault.refresh",
 				"title": "Refresh",
 				"icon": "$(refresh)"
 			},
 			{
-				"command": "commandvault.addSection",
+				"command": "cmdvault.addSection",
 				"title": "Add Section",
 				"icon": "$(add)"
 			},
 			{
-				"command": "commandvault.addCommand",
+				"command": "cmdvault.addCommand",
 				"title": "Add Command",
 				"icon": "$(add)"
 			},
 			{
-				"command": "commandvault.runInTerminal",
+				"command": "cmdvault.runInTerminal",
 				"title": "Run in Terminal",
 				"icon": "$(play)"
 			},
 			{
-				"command": "commandvault.copyCommand",
+				"command": "cmdvault.copyCommand",
 				"title": "Copy Command",
 				"icon": "$(copy)"
 			},
 			{
-				"command": "commandvault.editCommand",
+				"command": "cmdvault.editCommand",
 				"title": "Edit Command",
 				"icon": "$(edit)"
 			},
 			{
-				"command": "commandvault.renameSection",
+				"command": "cmdvault.renameSection",
 				"title": "Rename Section",
 				"icon": "$(edit)"
 			},
 			{
-				"command": "commandvault.deleteItem",
+				"command": "cmdvault.deleteItem",
 				"title": "Delete",
 				"icon": "$(trash)"
 			}
@@ -149,130 +149,130 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "commandvault.refresh",
-					"when": "view == commandvault.commandsView",
+					"command": "cmdvault.refresh",
+					"when": "view == cmdvault.commandsView",
 					"group": "navigation@1"
 				},
 				{
-					"command": "commandvault.addSection",
-					"when": "view == commandvault.commandsView",
+					"command": "cmdvault.addSection",
+					"when": "view == cmdvault.commandsView",
 					"group": "navigation@2"
 				}
 			],
 			"view/item/context": [
 				{
-					"command": "commandvault.addSection",
-					"when": "view == commandvault.commandsView && viewItem == globalRoot",
+					"command": "cmdvault.addSection",
+					"when": "view == cmdvault.commandsView && viewItem == globalRoot",
 					"group": "inline"
 				},
 				{
-					"command": "commandvault.addCommand",
-					"when": "view == commandvault.commandsView && viewItem == section",
+					"command": "cmdvault.addCommand",
+					"when": "view == cmdvault.commandsView && viewItem == section",
 					"group": "inline"
 				},
 				{
-					"command": "commandvault.addCommand",
-					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"command": "cmdvault.addCommand",
+					"when": "view == cmdvault.commandsView && viewItem == globalSection",
 					"group": "inline"
 				},
 				{
-					"command": "commandvault.runInTerminal",
-					"when": "view == commandvault.commandsView && viewItem == command",
+					"command": "cmdvault.runInTerminal",
+					"when": "view == cmdvault.commandsView && viewItem == command",
 					"group": "inline@1"
 				},
 				{
-					"command": "commandvault.runInTerminal",
-					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"command": "cmdvault.runInTerminal",
+					"when": "view == cmdvault.commandsView && viewItem == globalCommand",
 					"group": "inline@1"
 				},
 				{
-					"command": "commandvault.copyCommand",
-					"when": "view == commandvault.commandsView && viewItem == command",
+					"command": "cmdvault.copyCommand",
+					"when": "view == cmdvault.commandsView && viewItem == command",
 					"group": "inline@2"
 				},
 				{
-					"command": "commandvault.copyCommand",
-					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"command": "cmdvault.copyCommand",
+					"when": "view == cmdvault.commandsView && viewItem == globalCommand",
 					"group": "inline@2"
 				},
 				{
-					"command": "commandvault.addSection",
-					"when": "view == commandvault.commandsView && viewItem == globalRoot",
+					"command": "cmdvault.addSection",
+					"when": "view == cmdvault.commandsView && viewItem == globalRoot",
 					"group": "1_manage@1"
 				},
 				{
-					"command": "commandvault.addSection",
-					"when": "view == commandvault.commandsView && viewItem == project",
+					"command": "cmdvault.addSection",
+					"when": "view == cmdvault.commandsView && viewItem == project",
 					"group": "1_manage@1"
 				},
 				{
-					"command": "commandvault.addCommand",
-					"when": "view == commandvault.commandsView && viewItem == section",
+					"command": "cmdvault.addCommand",
+					"when": "view == cmdvault.commandsView && viewItem == section",
 					"group": "1_manage@2"
 				},
 				{
-					"command": "commandvault.addCommand",
-					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"command": "cmdvault.addCommand",
+					"when": "view == cmdvault.commandsView && viewItem == globalSection",
 					"group": "1_manage@2"
 				},
 				{
-					"command": "commandvault.renameSection",
-					"when": "view == commandvault.commandsView && viewItem == section",
+					"command": "cmdvault.renameSection",
+					"when": "view == cmdvault.commandsView && viewItem == section",
 					"group": "1_manage@3"
 				},
 				{
-					"command": "commandvault.renameSection",
-					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"command": "cmdvault.renameSection",
+					"when": "view == cmdvault.commandsView && viewItem == globalSection",
 					"group": "1_manage@3"
 				},
 				{
-					"command": "commandvault.runInTerminal",
-					"when": "view == commandvault.commandsView && viewItem == command",
+					"command": "cmdvault.runInTerminal",
+					"when": "view == cmdvault.commandsView && viewItem == command",
 					"group": "2_run@1"
 				},
 				{
-					"command": "commandvault.runInTerminal",
-					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"command": "cmdvault.runInTerminal",
+					"when": "view == cmdvault.commandsView && viewItem == globalCommand",
 					"group": "2_run@1"
 				},
 				{
-					"command": "commandvault.copyCommand",
-					"when": "view == commandvault.commandsView && viewItem == command",
+					"command": "cmdvault.copyCommand",
+					"when": "view == cmdvault.commandsView && viewItem == command",
 					"group": "2_run@2"
 				},
 				{
-					"command": "commandvault.copyCommand",
-					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"command": "cmdvault.copyCommand",
+					"when": "view == cmdvault.commandsView && viewItem == globalCommand",
 					"group": "2_run@2"
 				},
 				{
-					"command": "commandvault.editCommand",
-					"when": "view == commandvault.commandsView && viewItem == command",
+					"command": "cmdvault.editCommand",
+					"when": "view == cmdvault.commandsView && viewItem == command",
 					"group": "3_edit@1"
 				},
 				{
-					"command": "commandvault.editCommand",
-					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"command": "cmdvault.editCommand",
+					"when": "view == cmdvault.commandsView && viewItem == globalCommand",
 					"group": "3_edit@1"
 				},
 				{
-					"command": "commandvault.deleteItem",
-					"when": "view == commandvault.commandsView && viewItem == section",
+					"command": "cmdvault.deleteItem",
+					"when": "view == cmdvault.commandsView && viewItem == section",
 					"group": "9_delete@1"
 				},
 				{
-					"command": "commandvault.deleteItem",
-					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"command": "cmdvault.deleteItem",
+					"when": "view == cmdvault.commandsView && viewItem == globalSection",
 					"group": "9_delete@1"
 				},
 				{
-					"command": "commandvault.deleteItem",
-					"when": "view == commandvault.commandsView && viewItem == command",
+					"command": "cmdvault.deleteItem",
+					"when": "view == cmdvault.commandsView && viewItem == command",
 					"group": "9_delete@1"
 				},
 				{
-					"command": "commandvault.deleteItem",
-					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"command": "cmdvault.deleteItem",
+					"when": "view == cmdvault.commandsView && viewItem == globalCommand",
 					"group": "9_delete@1"
 				}
 			]

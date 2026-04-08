@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { VaultStorage } from "./storage";
 import type { CommandEntry, Section } from "./types";
 import {
-	CommandVaultTreeProvider,
+	CmdVaultTreeProvider,
 	isCommandNode,
 	isGlobalRoot,
 	isProjectModel,
@@ -36,9 +36,9 @@ export function activate(context: vscode.ExtensionContext) {
 		context.workspaceState,
 		context.globalState,
 	);
-	const treeProvider = new CommandVaultTreeProvider(storage);
+	const treeProvider = new CmdVaultTreeProvider(storage);
 
-	const treeView = vscode.window.createTreeView("commandvault.commandsView", {
+	const treeView = vscode.window.createTreeView("cmdvault.commandsView", {
 		treeDataProvider: treeProvider,
 		showCollapseAll: true,
 	});
@@ -64,8 +64,8 @@ export function activate(context: vscode.ExtensionContext) {
 		}),
 		vscode.workspace.onDidChangeConfiguration((e) => {
 			if (
-				e.affectsConfiguration("commandvault.commandClickAction") ||
-				e.affectsConfiguration("commandvault.useToolIcons")
+				e.affectsConfiguration("cmdvault.commandClickAction") ||
+				e.affectsConfiguration("cmdvault.useToolIcons")
 			) {
 				refresh();
 			}
@@ -91,7 +91,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 		const terminal = vscode.window.createTerminal({
 			...(cwd ? { cwd } : {}),
-			name: "CommandVault",
+			name: "CmdVault",
 		});
 		terminal.show();
 		terminal.sendText(model.entry.command, true);
@@ -384,14 +384,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		treeView,
-		vscode.commands.registerCommand("commandvault.refresh", refresh),
-		vscode.commands.registerCommand("commandvault.runInTerminal", runInTerminal),
-		vscode.commands.registerCommand("commandvault.copyCommand", copyCommand),
-		vscode.commands.registerCommand("commandvault.addSection", addSection),
-		vscode.commands.registerCommand("commandvault.addCommand", addCommand),
-		vscode.commands.registerCommand("commandvault.editCommand", editCommand),
-		vscode.commands.registerCommand("commandvault.renameSection", renameSection),
-		vscode.commands.registerCommand("commandvault.deleteItem", deleteItem),
+		vscode.commands.registerCommand("cmdvault.refresh", refresh),
+		vscode.commands.registerCommand("cmdvault.runInTerminal", runInTerminal),
+		vscode.commands.registerCommand("cmdvault.copyCommand", copyCommand),
+		vscode.commands.registerCommand("cmdvault.addSection", addSection),
+		vscode.commands.registerCommand("cmdvault.addCommand", addCommand),
+		vscode.commands.registerCommand("cmdvault.editCommand", editCommand),
+		vscode.commands.registerCommand("cmdvault.renameSection", renameSection),
+		vscode.commands.registerCommand("cmdvault.deleteItem", deleteItem),
 	);
 }
 

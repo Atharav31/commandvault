@@ -1,16 +1,16 @@
-# CommandVault — save & run CLI commands in VS Code
+# CmdVault — save & run CLI commands in VS Code
 
-**CommandVault** is a **Visual Studio Code extension** that acts as a **command manager** and **terminal helper**: keep **reusable shell commands**, **CLI snippets**, and **devops one-liners** in a **sidebar tree**—organized by **workspace project**, **sections**, and a **Global (shared)** library—then **run in terminal** or **copy to clipboard** in one click.
+**CmdVault** is a **Visual Studio Code extension** that acts as a **command manager** and **terminal helper**: keep **reusable shell commands**, **CLI snippets**, and **devops one-liners** in a **sidebar tree**—organized by **workspace project**, **sections**, and a **Global (shared)** library—then **run in terminal** or **copy to clipboard** in one click.
 
-**Author:** [Atharav Uttekar](https://github.com/Atharav31) · Product name: **CommandVault**
+**Author:** [Atharav Uttekar](https://github.com/Atharav31) · Marketplace extension ID: **`atharav-dev.cmdvault`**
 
 ---
 
-## Why CommandVault? (command palette alternative)
+## Why CmdVault? (command palette alternative)
 
-If you juggle **git**, **Docker**, **npm / yarn / pnpm**, **Kubernetes**, **Terraform**, or custom **bash / zsh / PowerShell** scripts, CommandVault gives you a **persistent command library** next to your files—not buried in history. It complements the **Command Palette** and **integrated terminal** for **productivity** and **team workflows** (global vs per-folder commands).
+If you juggle **git**, **Docker**, **npm / yarn / pnpm**, **Kubernetes**, **Terraform**, or custom **bash / zsh / PowerShell** scripts, CmdVault gives you a **persistent command library** next to your files—not buried in history. It complements the **Command Palette** and **integrated terminal** for **productivity** and **team workflows** (global vs per-folder commands).
 
-**Typical searches this extension matches:** *save terminal commands*, *run shell command from sidebar*, *CLI snippet manager*, *docker git npm commands vscode*, *workspace command list*, *multi-root workspace commands*, *copy paste terminal command*, *developer command vault*.
+**Typical searches this extension matches:** *save terminal commands*, *run shell command from sidebar*, *CLI snippet manager*, *docker git npm commands vscode*, *workspace command list*, *multi-root workspace commands*, *copy paste terminal command*, *command vault vscode*.
 
 ---
 
@@ -20,14 +20,14 @@ If you juggle **git**, **Docker**, **npm / yarn / pnpm**, **Kubernetes**, **Terr
 - **Per-project commands**: each **workspace folder** (including **multi-root** workspaces) has its own sections—ideal for **repo-specific** scripts.
 - **Global (shared) commands**: **machine-wide** storage for **common CLI** patterns (e.g. **git**, **docker compose**, **kubectl**, **npm run**) available in **every** project.
 - **Run in terminal** or **copy**; optional **tool-style icons** (Codicons) inferred from command text.
-- **Configurable click**: select-only, **run on click**, or **copy on click** (`commandvault.commandClickAction`).
+- **Configurable click**: select-only, **run on click**, or **copy on click** (`cmdvault.commandClickAction`).
 
 ---
 
 ## Getting started
 
-1. Install **CommandVault** from the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode) (search **CommandVault** or **Atharav Uttekar**).
-2. Open the **CommandVault** icon in the **Activity Bar**.
+1. Install **CmdVault** from the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode) (search **CmdVault**, **cmdvault**, or **Atharav Uttekar**).
+2. Open the **CmdVault** icon in the **Activity Bar**.
 3. Under **Global (shared)** or a **project folder**, use **Add Section**, then **Add Command** (toolbar **`+`**, inline, or right-click).
 4. Use **play** / **copy** on each row, or the context menu.
 
@@ -51,12 +51,12 @@ If no folder is open, **Global (shared)** still works; open a folder for **per-p
 
 ## Extension settings
 
-Search settings for **CommandVault**:
+Search settings for **CmdVault**:
 
 | Setting | Default | Description |
 |--------|---------|-------------|
-| `commandvault.commandClickAction` | `none` | Click behavior: `none`, `run`, or `copy`. |
-| `commandvault.useToolIcons` | `true` | Infer **icons** from command text (git, npm, docker-style). |
+| `cmdvault.commandClickAction` | `none` | Click behavior: `none`, `run`, or `copy`. |
+| `cmdvault.useToolIcons` | `true` | Infer **icons** from command text (git, npm, docker-style). |
 
 ---
 
@@ -65,7 +65,7 @@ Search settings for **CommandVault**:
 - **Workspace folders**: stored in **workspace state** (this VS Code workspace).
 - **Global (shared)**: stored in **global state** on this machine.
 
-Nothing is sent to the network by CommandVault; commands stay **local** unless you share them yourself.
+Nothing is sent to the network by CmdVault; commands stay **local** unless you share them yourself.
 
 ---
 
@@ -85,4 +85,4 @@ MIT — see [LICENSE](LICENSE).
 
 - **Repository**: [github.com/Atharav31/commandvault](https://github.com/Atharav31/commandvault)
 - **Issues**: [github.com/Atharav31/commandvault/issues](https://github.com/Atharav31/commandvault/issues)
-- **Author**: **Atharav Uttekar** — extension **CommandVault**
+- **Author**: **Atharav Uttekar** — extension **CmdVault** (`cmdvault`)
