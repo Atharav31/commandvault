@@ -3,7 +3,7 @@
 	"displayName": "CommandVault — CLI & terminal command manager",
 	"description": "CommandVault by Atharav Uttekar: save, organize & run shell/CLI commands from a sidebar—per workspace folder, sections, plus global git/docker/npm-style snippets. Copy or run in terminal.",
 	"version": "0.1.0",
-	"publisher": "atharav31",
+	"publisher": "atharav-dev",
 	"author": "Atharav Uttekar",
 	"license": "MIT",
 	"repository": {
