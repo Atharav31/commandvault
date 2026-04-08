@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { normalizeProjectData } from "./sort";
 import {
 	emptyProjectData,
 	emptyVaultData,
@@ -29,12 +30,13 @@ export class VaultStorage {
 
 	getProject(folderUri: string): ProjectData {
 		const vault = this.load();
-		return vault.projects[folderUri] ?? emptyProjectData();
+		const p = vault.projects[folderUri] ?? emptyProjectData();
+		return normalizeProjectData(structuredClone(p));
 	}
 
 	async setProject(folderUri: string, project: ProjectData): Promise<void> {
 		const vault = this.load();
-		vault.projects[folderUri] = project;
+		vault.projects[folderUri] = normalizeProjectData(project);
 		await this.save(vault);
 	}
 
@@ -55,13 +57,14 @@ export class VaultStorage {
 		if (!raw || raw.version !== 1 || !Array.isArray(raw.sections)) {
 			return emptyProjectData();
 		}
-		return { sections: raw.sections };
+		return normalizeProjectData({ sections: raw.sections });
 	}
 
 	async setGlobal(project: ProjectData): Promise<void> {
+		const normalized = normalizeProjectData(project);
 		await this.globalState.update(GLOBAL_STORAGE_KEY, {
 			version: 1,
-			sections: project.sections,
+			sections: normalized.sections,
 		});
 	}
 

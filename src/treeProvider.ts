@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { themeIconForShellCommand } from "./commandIcons";
+import { sortCommands, sortSections } from "./sort";
 import type { CommandEntry, Section } from "./types";
 import { VaultStorage } from "./storage";
 
@@ -83,10 +84,55 @@ export class CmdVaultTreeProvider
 	>();
 	readonly onDidChangeTreeData = this._onDidChange.event;
 
+	/** Substring filter (case-insensitive); empty shows everything. */
+	private filterQuery = "";
+
 	constructor(private readonly storage: VaultStorage) {}
+
+	setFilter(query: string): void {
+		this.filterQuery = query.trim();
+		this._onDidChange.fire();
+	}
+
+	getFilter(): string {
+		return this.filterQuery;
+	}
 
 	refresh(): void {
 		this._onDidChange.fire();
+	}
+
+	private filterNorm(): string {
+		return this.filterQuery.toLowerCase();
+	}
+
+	private sectionVisible(section: Section): boolean {
+		const q = this.filterNorm();
+		if (!q) {
+			return true;
+		}
+		if (section.name.toLowerCase().includes(q)) {
+			return true;
+		}
+		return section.commands.some(
+			(c) =>
+				c.label.toLowerCase().includes(q) ||
+				c.command.toLowerCase().includes(q),
+		);
+	}
+
+	private commandVisible(section: Section, entry: CommandEntry): boolean {
+		const q = this.filterNorm();
+		if (!q) {
+			return true;
+		}
+		if (section.name.toLowerCase().includes(q)) {
+			return true;
+		}
+		return (
+			entry.label.toLowerCase().includes(q) ||
+			entry.command.toLowerCase().includes(q)
+		);
 	}
 
 	getTreeItem(element: VaultTreeModel): vscode.TreeItem {
@@ -161,7 +207,13 @@ export class CmdVaultTreeProvider
 	): vscode.ProviderResult<VaultTreeModel[]> {
 		if (!element) {
 			const roots: VaultTreeModel[] = [{ kind: "globalRoot" }];
-			for (const folder of vscode.workspace.workspaceFolders ?? []) {
+			const folders = [...(vscode.workspace.workspaceFolders ?? [])].sort(
+				(a, b) =>
+					a.name.localeCompare(b.name, undefined, {
+						sensitivity: "base",
+					}),
+			);
+			for (const folder of folders) {
 				roots.push({
 					kind: "project",
 					folderUri: folder.uri.toString(),
@@ -172,33 +224,39 @@ export class CmdVaultTreeProvider
 		}
 
 		if (element.kind === "globalRoot") {
-			return this.storage.getGlobal().sections.map((section) => ({
-				kind: "section" as const,
-				scope: "global" as const,
-				section,
-			}));
+			return sortSections(this.storage.getGlobal().sections)
+				.filter((section) => this.sectionVisible(section))
+				.map((section) => ({
+					kind: "section" as const,
+					scope: "global" as const,
+					section,
+				}));
 		}
 
 		if (element.kind === "project") {
-			const data = this.storage.getProject(element.folderUri);
-			return data.sections.map((section) => ({
-				kind: "section" as const,
-				scope: "workspace" as const,
-				folderUri: element.folderUri,
-				section,
-			}));
+			return sortSections(this.storage.getProject(element.folderUri).sections)
+				.filter((section) => this.sectionVisible(section))
+				.map((section) => ({
+					kind: "section" as const,
+					scope: "workspace" as const,
+					folderUri: element.folderUri,
+					section,
+				}));
 		}
 
 		if (element.kind === "section") {
+			const cmds = sortCommands(element.section.commands).filter((entry) =>
+				this.commandVisible(element.section, entry),
+			);
 			if (element.scope === "global") {
-				return element.section.commands.map((entry) => ({
+				return cmds.map((entry) => ({
 					kind: "command" as const,
 					scope: "global" as const,
 					section: element.section,
 					entry,
 				}));
 			}
-			return element.section.commands.map((entry) => ({
+			return cmds.map((entry) => ({
 				kind: "command" as const,
 				scope: "workspace" as const,
 				folderUri: element.folderUri,

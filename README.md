@@ -21,6 +21,7 @@ If you juggle **git**, **Docker**, **npm / yarn / pnpm**, **Kubernetes**, **Terr
 - **Global (shared) commands**: **machine-wide** storage for **common CLI** patterns (e.g. **git**, **docker compose**, **kubectl**, **npm run**) available in **every** project.
 - **Run in terminal** or **copy**; optional **tool-style icons** (Codicons) inferred from command text.
 - **Configurable click**: select-only, **run on click**, or **copy on click** (`cmdvault.commandClickAction`).
+- **Search / Filter**: title bar **search** icon to filter by section name, command label, or command text; **Clear filter** when active. Sections and commands stay **sorted A→Z** (folders, section names, command labels).
 
 ---
 
@@ -28,8 +29,9 @@ If you juggle **git**, **Docker**, **npm / yarn / pnpm**, **Kubernetes**, **Terr
 
 1. Install **CmdVault** from the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode) (search **CmdVault**, **cmdvault**, or **Atharav Uttekar**).
 2. Open the **CmdVault** icon in the **Activity Bar**.
-3. Under **Global (shared)** or a **project folder**, use **Add Section**, then **Add Command** (toolbar **`+`**, inline, or right-click).
-4. Use **play** / **copy** on each row, or the context menu.
+3. Use **Search / Filter** in the view title if you want to narrow the list (optional).
+4. Under **Global (shared)** or a **project folder**, use **Add Section**, then **Add Command** (toolbar **`+`**, inline, or right-click).
+5. Use **play** / **copy** on each row, or the context menu.
 
 If no folder is open, **Global (shared)** still works; open a folder for **per-project** lists.
 
@@ -40,6 +42,8 @@ If no folder is open, **Global (shared)** still works; open a folder for **per-p
 | Command | Description |
 |--------|-------------|
 | **Refresh** | Reload the tree from storage. |
+| **Search / Filter** | Filter sections/commands (name or text); empty input clears. |
+| **Clear Filter** | Remove the active filter (shown when a filter is set). |
 | **Add Section** | New section under Global or a project. |
 | **Add Command** | Store a **shell** / **CLI** command under a section. |
 | **Run in Terminal** | Execute the command (workspace: that folder as `cwd`; global: first folder if any). |

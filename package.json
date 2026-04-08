@@ -2,7 +2,7 @@
 	"name": "cmdvault",
 	"displayName": "CmdVault — CLI & terminal command manager",
 	"description": "CmdVault by Atharav Uttekar: save, organize & run shell/CLI commands from a sidebar—per workspace folder, sections, plus global git/docker/npm-style snippets. Copy or run in terminal.",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"publisher": "atharav-dev",
 	"author": "Atharav Uttekar",
 	"license": "MIT",
@@ -144,6 +144,16 @@
 				"command": "cmdvault.deleteItem",
 				"title": "Delete",
 				"icon": "$(trash)"
+			},
+			{
+				"command": "cmdvault.filter",
+				"title": "Search / Filter",
+				"icon": "$(search)"
+			},
+			{
+				"command": "cmdvault.clearFilter",
+				"title": "Clear Filter",
+				"icon": "$(close)"
 			}
 		],
 		"menus": {
@@ -157,6 +167,16 @@
 					"command": "cmdvault.addSection",
 					"when": "view == cmdvault.commandsView",
 					"group": "navigation@2"
+				},
+				{
+					"command": "cmdvault.filter",
+					"when": "view == cmdvault.commandsView",
+					"group": "navigation@3"
+				},
+				{
+					"command": "cmdvault.clearFilter",
+					"when": "view == cmdvault.commandsView && cmdvault.filterActive",
+					"group": "navigation@4"
 				}
 			],
 			"view/item/context": [

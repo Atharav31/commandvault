@@ -43,6 +43,16 @@ export function activate(context: vscode.ExtensionContext) {
 		showCollapseAll: true,
 	});
 
+	const syncFilterContext = () => {
+		const q = treeProvider.getFilter();
+		void vscode.commands.executeCommand(
+			"setContext",
+			"cmdvault.filterActive",
+			q.length > 0,
+		);
+		treeView.description = q.length > 0 ? q : undefined;
+	};
+
 	const updateViewMessage = () => {
 		if (!vscode.workspace.workspaceFolders?.length) {
 			treeView.message =
@@ -54,10 +64,32 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const refresh = () => {
 		updateViewMessage();
+		syncFilterContext();
 		treeProvider.refresh();
 	};
 
+	const filterFromInput = async () => {
+		const value = await vscode.window.showInputBox({
+			title: "CmdVault: Search / Filter",
+			prompt:
+				"Show sections and commands that match this text (section name, command label, or command text). Leave empty to clear.",
+			value: treeProvider.getFilter(),
+			placeHolder: "e.g. docker, npm, git",
+		});
+		if (value === undefined) {
+			return;
+		}
+		treeProvider.setFilter(value);
+		syncFilterContext();
+	};
+
+	const clearFilter = () => {
+		treeProvider.setFilter("");
+		syncFilterContext();
+	};
+
 	updateViewMessage();
+	syncFilterContext();
 	context.subscriptions.push(
 		vscode.workspace.onDidChangeWorkspaceFolders(() => {
 			refresh();
@@ -392,6 +424,8 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand("cmdvault.editCommand", editCommand),
 		vscode.commands.registerCommand("cmdvault.renameSection", renameSection),
 		vscode.commands.registerCommand("cmdvault.deleteItem", deleteItem),
+		vscode.commands.registerCommand("cmdvault.filter", filterFromInput),
+		vscode.commands.registerCommand("cmdvault.clearFilter", clearFilter),
 	);
 }
 
