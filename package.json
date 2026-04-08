@@ -1,23 +1,281 @@
 {
 	"name": "commandvault",
-	"displayName": "CommandVault",
-	"description": "CommandVault helps you store, organize, and reuse your frequently used Git, NPM, and custom CLI commands directly inside Visual Studio Code.",
-	"version": "0.0.1",
+	"displayName": "CommandVault — CLI & terminal command manager",
+	"description": "CommandVault by Atharav Uttekar: save, organize & run shell/CLI commands from a sidebar—per workspace folder, sections, plus global git/docker/npm-style snippets. Copy or run in terminal.",
+	"version": "0.1.0",
+	"publisher": "atharav31",
+	"author": "Atharav Uttekar",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Atharav31/commandvault.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Atharav31/commandvault/issues"
+	},
+	"homepage": "https://github.com/Atharav31/commandvault#readme",
+	"keywords": [
+		"CommandVault",
+		"Atharav Uttekar",
+		"commandvault",
+		"commands",
+		"command manager",
+		"save commands",
+		"terminal",
+		"run in terminal",
+		"cli",
+		"shell",
+		"bash",
+		"zsh",
+		"powershell",
+		"snippets",
+		"clipboard",
+		"copy command",
+		"productivity",
+		"workspace",
+		"multi-root",
+		"sidebar",
+		"activity bar",
+		"docker",
+		"kubernetes",
+		"kubectl",
+		"git",
+		"npm",
+		"yarn",
+		"pnpm",
+		"devops",
+		"automation"
+	],
 	"engines": {
 		"vscode": "^1.110.0"
 	},
 	"categories": [
 		"Other"
 	],
-	"activationEvents": [],
+	"galleryBanner": {
+		"color": "#1e3a5f",
+		"theme": "dark"
+	},
+	"activationEvents": [
+		"onView:commandvault.commandsView"
+	],
 	"main": "./dist/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "commandvault",
+					"title": "CommandVault",
+					"icon": "media/commandvault.svg"
+				}
+			]
+		},
+		"views": {
+			"commandvault": [
+				{
+					"id": "commandvault.commandsView",
+					"name": "Commands"
+				}
+			]
+		},
+		"configuration": {
+			"title": "CommandVault",
+			"properties": {
+				"commandvault.commandClickAction": {
+					"type": "string",
+					"enum": [
+						"none",
+						"run",
+						"copy"
+					],
+					"enumDescriptions": [
+						"Only select the row—use the inline or context menu actions to run or copy.",
+						"Run the command in a new terminal.",
+						"Copy the command text to the clipboard."
+					],
+					"default": "none",
+					"description": "What happens when you click a command in the CommandVault tree."
+				},
+				"commandvault.useToolIcons": {
+					"type": "boolean",
+					"default": true,
+					"description": "Infer an icon from the command text (git, npm, docker, …) using VS Code Codicons. Product icon themes can still restyle these icons."
+				}
+			}
+		},
 		"commands": [
 			{
-				"command": "commandvault.helloWorld",
-				"title": "Hello World"
+				"command": "commandvault.refresh",
+				"title": "Refresh",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "commandvault.addSection",
+				"title": "Add Section",
+				"icon": "$(add)"
+			},
+			{
+				"command": "commandvault.addCommand",
+				"title": "Add Command",
+				"icon": "$(add)"
+			},
+			{
+				"command": "commandvault.runInTerminal",
+				"title": "Run in Terminal",
+				"icon": "$(play)"
+			},
+			{
+				"command": "commandvault.copyCommand",
+				"title": "Copy Command",
+				"icon": "$(copy)"
+			},
+			{
+				"command": "commandvault.editCommand",
+				"title": "Edit Command",
+				"icon": "$(edit)"
+			},
+			{
+				"command": "commandvault.renameSection",
+				"title": "Rename Section",
+				"icon": "$(edit)"
+			},
+			{
+				"command": "commandvault.deleteItem",
+				"title": "Delete",
+				"icon": "$(trash)"
 			}
-		]
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "commandvault.refresh",
+					"when": "view == commandvault.commandsView",
+					"group": "navigation@1"
+				},
+				{
+					"command": "commandvault.addSection",
+					"when": "view == commandvault.commandsView",
+					"group": "navigation@2"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "commandvault.addSection",
+					"when": "view == commandvault.commandsView && viewItem == globalRoot",
+					"group": "inline"
+				},
+				{
+					"command": "commandvault.addCommand",
+					"when": "view == commandvault.commandsView && viewItem == section",
+					"group": "inline"
+				},
+				{
+					"command": "commandvault.addCommand",
+					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"group": "inline"
+				},
+				{
+					"command": "commandvault.runInTerminal",
+					"when": "view == commandvault.commandsView && viewItem == command",
+					"group": "inline@1"
+				},
+				{
+					"command": "commandvault.runInTerminal",
+					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"group": "inline@1"
+				},
+				{
+					"command": "commandvault.copyCommand",
+					"when": "view == commandvault.commandsView && viewItem == command",
+					"group": "inline@2"
+				},
+				{
+					"command": "commandvault.copyCommand",
+					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"group": "inline@2"
+				},
+				{
+					"command": "commandvault.addSection",
+					"when": "view == commandvault.commandsView && viewItem == globalRoot",
+					"group": "1_manage@1"
+				},
+				{
+					"command": "commandvault.addSection",
+					"when": "view == commandvault.commandsView && viewItem == project",
+					"group": "1_manage@1"
+				},
+				{
+					"command": "commandvault.addCommand",
+					"when": "view == commandvault.commandsView && viewItem == section",
+					"group": "1_manage@2"
+				},
+				{
+					"command": "commandvault.addCommand",
+					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"group": "1_manage@2"
+				},
+				{
+					"command": "commandvault.renameSection",
+					"when": "view == commandvault.commandsView && viewItem == section",
+					"group": "1_manage@3"
+				},
+				{
+					"command": "commandvault.renameSection",
+					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"group": "1_manage@3"
+				},
+				{
+					"command": "commandvault.runInTerminal",
+					"when": "view == commandvault.commandsView && viewItem == command",
+					"group": "2_run@1"
+				},
+				{
+					"command": "commandvault.runInTerminal",
+					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"group": "2_run@1"
+				},
+				{
+					"command": "commandvault.copyCommand",
+					"when": "view == commandvault.commandsView && viewItem == command",
+					"group": "2_run@2"
+				},
+				{
+					"command": "commandvault.copyCommand",
+					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"group": "2_run@2"
+				},
+				{
+					"command": "commandvault.editCommand",
+					"when": "view == commandvault.commandsView && viewItem == command",
+					"group": "3_edit@1"
+				},
+				{
+					"command": "commandvault.editCommand",
+					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"group": "3_edit@1"
+				},
+				{
+					"command": "commandvault.deleteItem",
+					"when": "view == commandvault.commandsView && viewItem == section",
+					"group": "9_delete@1"
+				},
+				{
+					"command": "commandvault.deleteItem",
+					"when": "view == commandvault.commandsView && viewItem == globalSection",
+					"group": "9_delete@1"
+				},
+				{
+					"command": "commandvault.deleteItem",
+					"when": "view == commandvault.commandsView && viewItem == command",
+					"group": "9_delete@1"
+				},
+				{
+					"command": "commandvault.deleteItem",
+					"when": "view == commandvault.commandsView && viewItem == globalCommand",
+					"group": "9_delete@1"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
@@ -31,9 +289,11 @@
 		"pretest": "npm run compile-tests && npm run compile && npm run lint",
 		"check-types": "tsc --noEmit",
 		"lint": "eslint src",
-		"test": "vscode-test"
+		"test": "vscode-test",
+		"vsce:package": "vsce package"
 	},
 	"devDependencies": {
+		"@vscode/vsce": "^3.7.1",
 		"@types/vscode": "^1.110.0",
 		"@types/mocha": "^10.0.10",
 		"@types/node": "22.x",

@@ -1,9 +1,18 @@
-# Change Log
+# Changelog
 
-All notable changes to the "commandvault" extension will be documented in this file.
+All notable changes to **CommandVault** are documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.1.0] - 2026-04-08
 
-- Initial release
+### Added
+
+- Activity bar sidebar **Commands** tree with per-workspace-folder sections and **Global (shared)** commands.
+- **Add Section** / **Add Command**, inline **+** on sections, **run** / **copy** on commands, context menus.
+- **Run in Terminal** and **Copy Command**; storage in workspace state (per folder) and global state (shared).
+- Settings: `commandvault.commandClickAction` (`none` | `run` | `copy`), `commandvault.useToolIcons`.
+- Heuristic **tool icons** (Codicons) from command text.
+- Documentation and MIT license for marketplace packaging.
+
+[0.1.0]: https://github.com/Atharav31/commandvault/releases/tag/v0.1.0

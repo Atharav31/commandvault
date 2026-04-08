@@ -1,71 +1,88 @@
-# commandvault README
+# CommandVault — save & run CLI commands in VS Code
 
-This is the README for your extension "commandvault". After writing up a brief description, we recommend including the following sections.
+**CommandVault** is a **Visual Studio Code extension** that acts as a **command manager** and **terminal helper**: keep **reusable shell commands**, **CLI snippets**, and **devops one-liners** in a **sidebar tree**—organized by **workspace project**, **sections**, and a **Global (shared)** library—then **run in terminal** or **copy to clipboard** in one click.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+**Author:** [Atharav Uttekar](https://github.com/Atharav31) · Product name: **CommandVault**
 
 ---
 
-## Following extension guidelines
+## Why CommandVault? (command palette alternative)
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+If you juggle **git**, **Docker**, **npm / yarn / pnpm**, **Kubernetes**, **Terraform**, or custom **bash / zsh / PowerShell** scripts, CommandVault gives you a **persistent command library** next to your files—not buried in history. It complements the **Command Palette** and **integrated terminal** for **productivity** and **team workflows** (global vs per-folder commands).
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+**Typical searches this extension matches:** *save terminal commands*, *run shell command from sidebar*, *CLI snippet manager*, *docker git npm commands vscode*, *workspace command list*, *multi-root workspace commands*, *copy paste terminal command*, *developer command vault*.
 
-## Working with Markdown
+---
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+## Features
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+- **Sidebar tree** in the **activity bar** (like Explorer / Source Control): expand/collapse, **inline** run/copy/**add**, context menus.
+- **Per-project commands**: each **workspace folder** (including **multi-root** workspaces) has its own sections—ideal for **repo-specific** scripts.
+- **Global (shared) commands**: **machine-wide** storage for **common CLI** patterns (e.g. **git**, **docker compose**, **kubectl**, **npm run**) available in **every** project.
+- **Run in terminal** or **copy**; optional **tool-style icons** (Codicons) inferred from command text.
+- **Configurable click**: select-only, **run on click**, or **copy on click** (`commandvault.commandClickAction`).
 
-## For more information
+---
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Getting started
 
-**Enjoy!**
+1. Install **CommandVault** from the [VS Code Marketplace](https://marketplace.visualstudio.com/vscode) (search **CommandVault** or **Atharav Uttekar**).
+2. Open the **CommandVault** icon in the **Activity Bar**.
+3. Under **Global (shared)** or a **project folder**, use **Add Section**, then **Add Command** (toolbar **`+`**, inline, or right-click).
+4. Use **play** / **copy** on each row, or the context menu.
+
+If no folder is open, **Global (shared)** still works; open a folder for **per-project** lists.
+
+---
+
+## Commands
+
+| Command | Description |
+|--------|-------------|
+| **Refresh** | Reload the tree from storage. |
+| **Add Section** | New section under Global or a project. |
+| **Add Command** | Store a **shell** / **CLI** command under a section. |
+| **Run in Terminal** | Execute the command (workspace: that folder as `cwd`; global: first folder if any). |
+| **Copy Command** | Copy command text to the **clipboard**. |
+| **Edit Command** / **Rename Section** | Update labels or text. |
+| **Delete** | Remove a command or section. |
+
+---
+
+## Extension settings
+
+Search settings for **CommandVault**:
+
+| Setting | Default | Description |
+|--------|---------|-------------|
+| `commandvault.commandClickAction` | `none` | Click behavior: `none`, `run`, or `copy`. |
+| `commandvault.useToolIcons` | `true` | Infer **icons** from command text (git, npm, docker-style). |
+
+---
+
+## Data & privacy
+
+- **Workspace folders**: stored in **workspace state** (this VS Code workspace).
+- **Global (shared)**: stored in **global state** on this machine.
+
+Nothing is sent to the network by CommandVault; commands stay **local** unless you share them yourself.
+
+---
+
+## Requirements
+
+- **VS Code** `^1.110.0` (see `engines` in `package.json`).
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+---
+
+## Links
+
+- **Repository**: [github.com/Atharav31/commandvault](https://github.com/Atharav31/commandvault)
+- **Issues**: [github.com/Atharav31/commandvault/issues](https://github.com/Atharav31/commandvault/issues)
+- **Author**: **Atharav Uttekar** — extension **CommandVault**
