@@ -6,6 +6,7 @@
 	"publisher": "atharav-dev",
 	"author": "Atharav Uttekar",
 	"license": "MIT",
+	"icon": "media/icon.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Atharav31/commandvault.git"
